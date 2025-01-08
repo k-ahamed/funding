@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Payment</title>
+</head>
+<body>
+
+
+    <div class="container">
+        <h1 class="fade-in">Donate</h1>
+        <div id="selected-card-details" class="card-details"></div>
+        <form id="paymentForm" class="form-slide-in">
+            <input type="text" placeholder="Name" required>
+            <input type="tel" placeholder="Phone Number" required>
+            <input type="email" placeholder="Email" required>
+        </form>
+        <h2 class="fade-in">Scan to Pay</h2>
+        <img src="assets/roronoa-zoro-wanted-5120x2880-10911.jpg" alt="QR Code" class="qr-zoom">
+    </div>
+
+
+
+
+    
+   <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Retrieve card details from localStorage
+            const cardData = JSON.parse(localStorage.getItem('selectedCard'));
+            const cardDetailsDiv = document.getElementById('selected-card-details');
+            
+            if (cardData) {
+                // Display card details dynamically
+                cardDetailsDiv.innerHTML = `
+                    <h2>Selected Card</h2>
+                    <p><strong>Title:</strong> ${cardData.title}</p>
+                    <p><strong>Description:</strong> ${cardData.description}</p>
+                `;
+            }
+
+            const qrCode = document.querySelector(".qr-zoom");
+
+            qrCode.addEventListener("mouseenter", () => {
+                qrCode.style.boxShadow = "0 10px 25px rgba(0, 255, 0, 0.5)";
+            });
+
+            qrCode.addEventListener("mouseleave", () => {
+                qrCode.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.5)";
+            });
+        });
+    </script>
+</body>
+</html>
